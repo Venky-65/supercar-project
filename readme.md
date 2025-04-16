@@ -13,3 +13,17 @@ I Have created Home , Electric , Online booking, About us , contact us , and  lo
 -I have created toggle for mobile version.
 ## Installation
 - I have installed Vs code and add live server extension and press Go live to run the page
+
+- # Supercar Elite - Backend
+
+This is the backend for the Supercar Elite web application. It is built using Node.js, Express, and MongoDB.
+
+## How it works
+
+- The backend connects to MongoDB using Mongoose.
+- It provides APIs for:
+  - User authentication (register and login)
+  - Booking cars (create, view, and delete bookings)
+  - Contact us (Contact us form)
+- It allows requests from the frontend using CORS.
+- Data is sent and received in JSON format.
