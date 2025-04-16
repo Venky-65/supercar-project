@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - Supercar Elite</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cart-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+      color: #333;
+    }
+
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .cart-item .car-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .cart-item .car-description {
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .delete-btn {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .delete-btn:hover {
+      background-color: #ff3333;
+    }
+
+    .back-link {
+      display: block;
+      margin: 20px auto 0;
+      text-align: center;
+      color: #007BFF;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <a href="index.html">
+        <img src="logo/logo.jpg" alt="Supercar Logo" />
+      </a>
+      <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="electric.html">Electric</a>
+        <a href="onlineBooking.html">Online Booking</a>
+        <a href="cart.html">Cart</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cart-container">
+    <h2>Your Bookings</h2>
+    <div id="cartItems"></div>
+    <a href="onlineBooking.html" class="back-link">← Back to Booking</a>
+  </div>
+
+  <footer class="footer">
+    &copy; 2025 Supercar Elite | All Rights Reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('http://localhost:5000/api/bookings')
+        .then(res => res.json())
+        .then(bookings => {
+          const cartItemsDiv = document.getElementById('cartItems');
+
+          if (bookings.length === 0) {
+            cartItemsDiv.innerHTML = '<p style="text-align:center;">Your cart is empty.</p>';
+            return;
+          }
+
+          bookings.reverse().forEach(booking => {
+            const item = document.createElement('div');
+            item.classList.add('cart-item');
+            item.innerHTML = `
+              <div class="car-name">${booking.carName}</div>
+              <div class="car-description">${booking.carDescription}</div>
+              <button class="delete-btn" onclick="deleteBooking('${booking._id}')">Delete</button>
+            `;
+            cartItemsDiv.appendChild(item);
+          });
+        })
+        .catch(err => {
+          console.error('Error fetching bookings:', err);
+          document.getElementById('cartItems').innerHTML = '<p style="text-align:center; color: red;">Failed to load cart items.</p>';
+        });
+    });
+
+    function deleteBooking(bookingId) {
+      fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
+        method: 'DELETE',
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'Booking deleted successfully') {
+          // Reload the page to update the cart items
+          location.reload();
+        } else {
+          alert('Failed to delete booking');
+        }
+      })
+      .catch(err => {
+        console.error('Error deleting booking:', err);
+        alert('Failed to delete booking');
+      });
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

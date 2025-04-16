@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supercar Elite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html">
+                <img src="logo/logo.jpg" alt="Supercar Logo">
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="electric.html">Electric</a>
+                <a href="onlineBooking.html">Online Booking</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact Us</a>
+                <!-- This login link will be hidden when the user is logged in -->
+                <a href="login.html" id="loginLink">Login</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="login-container">
+        <div class="login" id="loginForm">
+            <h2>Login</h2>
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button onclick="handleLogin()">Login</button>
+            <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
+        </div>
+        
+        <div class="login" style="display:none;" id="signupForm">
+            <h2>Sign Up</h2>
+            <input type="text" id="signupName" placeholder="Username" required>
+            <input type="email" id="signupEmail" placeholder="Email" required>
+            <input type="password" id="signupPassword" placeholder="Password" required>
+            <button onclick="handleSignup()">Sign Up</button>
+            <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Logout Button (Initially Hidden) -->
+    <button id="logoutButton" style="display:none;" onclick="handleLogout()">Logout</button>
+    
+    <footer class="footer">
+        &copy; 2025 Supercar Elite | Home | Electric | Book Now | All Rights Reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

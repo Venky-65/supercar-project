@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supercar Elite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html">
+                <img src="logo/logo.jpg" alt="Supercar Logo">
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="electric.html">Electric</a>
+                <a href="onlineBooking.html">Online Booking</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="contactus.html">Contact Us</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="title-box">
+            <h1 class="hero-title">Supercar Elite</h1>
+        </div>
+        <img src="Images/car.jpg" class="active" id="slide1">
+        <img src="Images/car2.jpg" id="slide2">
+        <img src="Images/car3.jpg" id="slide3">
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </section>
+    
+    <section class="index">
+        <div class="video-container">
+            <video autoplay muted loop id="background-video">
+                <source src="Images/video.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content">
+                <h2>DISCOVER OUR NEW COLLECTION</h2>
+                <div class="collection">
+                    <div class="car-card-container">
+                        <div class="car-card">
+                            <img src="Images/cars3.jpg" alt="Car ">
+                        </div>
+                        <div class="car-info">
+                            <p class="car-name">Sián FKP 37</p>
+                            <p class="car-description">A super sports car with a V12 engine and hybrid technology, and the Urus, the first Super Sport Utility Vehicle, blending supercar performance</p>
+                            <button class="discover-more">Discover More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        &copy; 2025 Supercar Elite| Home | Electric | Book Now | All Rights Reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

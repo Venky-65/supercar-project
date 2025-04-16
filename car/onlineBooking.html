@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supercar Elite</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <a href="index.html">
+        <img src="logo/logo.jpg" alt="Supercar Logo">
+      </a>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        &#9776;
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="electric.html">Electric</a>
+        <a href="onlineBooking.html">Online Booking</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="title-box">
+      <h1 class="hero-title">Book Your Ride Now</h1>
+    </div>
+    <img src="Images/back ground of shops.jpg" class="active" id="slide">
+  </section>
+
+  <section class="bookonline">
+    <div class="content">
+      <h2>OUR RIDES</h2>
+      <div class="collection">
+        <!-- Car 1 -->
+        <div class="car-card-container">
+          <div class="car-card">
+            <img src="Images/online1.jpg" alt="Car">
+          </div>
+          <div class="car-info">
+            <p class="car-name">Lamborghini Huracán STO</p>
+            <p class="car-description">A track-focused supercar that delivers extreme aerodynamics, lightweight construction, and a roaring naturally aspirated V10 engine. Designed for performance enthusiast</p>
+            <button class="discover-more" onclick="bookNow(this)">Click to Book Now</button>
+          </div>
+        </div>
+
+        <!-- Car 2 -->
+        <div class="car-card-container">
+          <div class="car-card">
+            <img src="Images/online2.jpg" alt="Car">
+          </div>
+          <div class="car-info">
+            <p class="car-name">Wrangler Rubicon</p>
+            <p class="car-description">Rubicon is built for adventure host of off-road features, making it perfect for tackling tough trails and extreme conditions</p>
+            <button class="discover-more" onclick="bookNow(this)">Click to Book Now</button>
+          </div>
+        </div>
+
+        <!-- Car 3 -->
+        <div class="car-card-container">
+          <div class="car-card">
+            <img src="Images/online3.jpg" alt="Car">
+          </div>
+          <div class="car-info">
+            <p class="car-name">911 Turbo S</p>
+            <p class="car-description">A legendary sports car with a perfect blend of performance, the 911 Turbo S can accelerate from 0-60 mph in just 2.6 seconds. </p>
+            <button class="discover-more" onclick="bookNow(this)">Click to Book Now</button>
+          </div>
+        </div>
+
+        <!-- Car 4 -->
+        <div class="car-card-container">
+          <div class="car-card">
+            <img src="Images/online4.jpg" alt="Car">
+          </div>
+          <div class="car-info">
+            <p class="car-name">Chevrolet Corvette Stingray</p>
+            <p class="car-description">The Corvette Stingray features handling  a 0-60 mph time of around 2.9 seconds.</p>
+            <button class="discover-more" onclick="bookNow(this)">Click to Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 Supercar Elite | Home | Electric | Book Now | All Rights Reserved.
+  </footer>
+
+  <script>
+    function bookNow(button) {
+      const carCard = button.closest('.car-info');
+      const carName = carCard.querySelector('.car-name').textContent;
+      const carDescription = carCard.querySelector('.car-description').textContent;
+
+      fetch('http://localhost:5000/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carName, carDescription })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message || 'Booking successful!');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Booking failed. Please try again.');
+      });
+    }
+
+    // Toggle menu script (optional, assuming you have this in script.js)
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
